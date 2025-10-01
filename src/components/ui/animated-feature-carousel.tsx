@@ -71,6 +71,8 @@ interface Step {
   name: string
   title: string
   description: string
+  features: string[]
+  path: string
 }
 
 const TOTAL_STEPS = 4
@@ -78,27 +80,55 @@ const TOTAL_STEPS = 4
 const steps: readonly Step[] = [
   {
     id: "1",
-    name: "Starter",
-    title: "$2,500/month",
-    description: "Perfect for small businesses getting started with automation. Includes basic workflow automation, email support, 2 custom integrations, monthly reporting, and up to 1,000 tasks/month.",
+    name: "Lead Generation & CRM Integration",
+    title: "Lead Generation & CRM Integration",
+    description: "Transform your lead generation with intelligent automation that captures, qualifies, and nurtures prospects 24/7.",
+    features: [
+      'Automated lead capture from multiple channels',
+      'Smart lead qualification and scoring',
+      'Seamless CRM integration and data sync',
+      'Personalized follow-up sequences'
+    ],
+    path: '/services/lead-generation'
   },
   {
     id: "2",
-    name: "Professional",
-    title: "$5,000/month",
-    description: "Advanced automation for growing businesses. Features advanced AI workflows, priority support, 5 custom integrations, weekly reporting, up to 10,000 tasks/month, and custom chatbot development.",
+    name: "Website Development",
+    title: "Website Development",
+    description: "Build high-converting websites and landing pages designed specifically for lead generation and automation.",
+    features: [
+      'Mobile-responsive design',
+      'Built-in lead capture forms',
+      'SEO optimization',
+      'Analytics and conversion tracking'
+    ],
+    path: '/services/website-development'
   },
   {
     id: "3",
-    name: "Enterprise",
-    title: "Custom Pricing",
-    description: "Tailored solutions for large organizations. Unlimited automation, dedicated account manager, unlimited integrations, real-time analytics, unlimited tasks, white-label solutions, and on-premise deployment.",
+    name: "AI Chat & Customer Support",
+    title: "AI Chat & Customer Support",
+    description: "Deploy intelligent chatbots that provide instant, personalized customer support while learning from every interaction.",
+    features: [
+      'Custom-trained AI chatbots',
+      '24/7 automated customer support',
+      'Multi-language support capabilities',
+      'Seamless handoff to human agents'
+    ],
+    path: '/services/ai-chat'
   },
   {
     id: "4",
-    name: "Expected Results",
-    title: "Proven Performance",
-    description: "Lead generation: 200-400% increase in qualified leads. Customer support: 70-90% reduction in tickets. Appointments: 3x more qualified bookings with 60% fewer no-shows. Websites: 150-300% conversion increase.",
+    name: "Appointment Setting",
+    title: "Appointment Setting",
+    description: "Automate your entire booking process with AI that qualifies prospects and schedules high-value meetings.",
+    features: [
+      'Smart prospect qualification',
+      'Automated calendar management',
+      'Follow-up and reminder sequences',
+      'No-show reduction strategies'
+    ],
+    path: '/services/appointment-setting'
   },
 ]
 
@@ -217,7 +247,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
       style={{ "--x": useMotionTemplate`${mouseX}px`, "--y": useMotionTemplate`${mouseY}px` } as WrapperStyle}
     >
       <div className="relative w-full overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900">
-        <div className="m-10 min-h-[450px] w-full">
+        <div className="m-10 min-h-[562px] w-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={step}
@@ -227,14 +257,6 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
-              <motion.div
-                className="text-sm font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-500"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
-              >
-                  {steps[step].name}
-              </motion.div>
               <motion.h2
                 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl"
                 initial={{ opacity: 0, x: -20 }}
@@ -251,6 +273,39 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
                 <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
                   {steps[step].description}
                 </p>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
+              >
+                <h4 className="text-sm font-semibold text-green-500 dark:text-green-400 mb-3">What's Included:</h4>
+                <ul className="space-y-2">
+                  {steps[step].features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="flex items-start gap-2">
+                      <svg className="w-4 h-4 text-green-500 dark:text-green-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-sm text-neutral-700 dark:text-neutral-400">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
+                className="mt-2"
+              >
+                <a
+                  href={steps[step].path}
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-600 to-sky-500 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:from-sky-500 hover:to-sky-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+                >
+                  Learn More
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </motion.div>
             </motion.div>
           </AnimatePresence>
@@ -349,7 +404,7 @@ export function FeatureCarousel({
     }
   }
   return (
-    <div className="flex flex-col gap-12 w-full max-w-4xl mx-auto p-4">
+    <div className="flex flex-col gap-12 w-full max-w-full mx-auto p-4">
         <FeatureCard {...props} step={step}>
             <AnimatePresence mode="wait">
                 <motion.div key={step} {...ANIMATION_PRESETS.fadeInScale} className="w-full h-full absolute">
