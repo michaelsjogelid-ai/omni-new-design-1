@@ -4,6 +4,7 @@ import { Users, Globe, MessageSquare, Calendar, CheckCircle, ArrowRight, Sparkle
 import AnimatedHowWeWork from '../components/AnimatedHowWeWork';
 import { LampContainer } from '../components/ui/lamp-colored';
 import { motion } from 'framer-motion';
+import { FeatureCarousel } from '../components/ui/animated-feature-carousel';
 import '../styles/animated-how-we-work.css';
 
 const Services: React.FC = () => {
@@ -135,31 +136,19 @@ const Services: React.FC = () => {
           ))}
         </div>
 
-        {/* Guarantee Section with Expected Results */}
-        <div className="bg-green-400/10 border border-green-400/30 rounded-2xl p-8 mb-16">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <CheckCircle className="text-green-400" size={32} />
-            <h3 className="text-2xl font-bold text-green-400">Expected Results</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white/5 rounded-xl p-6">
-              <h4 className="font-semibold text-green-400 mb-2">Lead Generation & CRM Integration</h4>
-              <p className="text-gray-300 text-xs">Increase qualified leads by 200-400% while reducing manual work by 85%</p>
-            </div>
-            <div className="bg-white/5 rounded-xl p-6">
-              <h4 className="font-semibold text-green-400 mb-2">AI Chat & Customer Support</h4>
-              <p className="text-gray-300 text-xs">Reduce support tickets by 70-90% and improve customer satisfaction</p>
-            </div>
-            <div className="bg-white/5 rounded-xl p-6">
-              <h4 className="font-semibold text-green-400 mb-2">Intelligent Appointment Setting</h4>
-              <p className="text-gray-300 text-xs">Book 3x more qualified appointments with 60% fewer no-shows</p>
-            </div>
-            <div className="bg-white/5 rounded-xl p-6">
-              <h4 className="font-semibold text-green-400 mb-2">Conversion-Optimized Websites</h4>
-              <p className="text-gray-300 text-xs">Increase website conversions by 150-300% with professional design</p>
-            </div>
-          </div>
+        {/* Animated Feature Carousel */}
+        <div className="mb-16">
+          <FeatureCarousel
+            image={{
+              step1img1: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1740&auto=format&fit=crop",
+              step1img2: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1740&auto=format&fit=crop",
+              step2img1: "https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1740&auto=format&fit=crop",
+              step2img2: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1740&auto=format&fit=crop",
+              step3img: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1740&auto=format&fit=crop",
+              step4img: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=1740&auto=format&fit=crop",
+              alt: "Service features"
+            }}
+          />
         </div>
 
         {/* Process Section */}
