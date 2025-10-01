@@ -73,9 +73,12 @@ interface Step {
   description: string
   features: string[]
   path: string
+  icon: React.ReactNode
 }
 
 const TOTAL_STEPS = 4
+
+import { Users, Globe, MessageSquare, Calendar } from 'lucide-react'
 
 const steps: readonly Step[] = [
   {
@@ -89,7 +92,8 @@ const steps: readonly Step[] = [
       'Seamless CRM integration and data sync',
       'Personalized follow-up sequences'
     ],
-    path: '/services/lead-generation'
+    path: '/services/lead-generation',
+    icon: <Users size={48} />
   },
   {
     id: "2",
@@ -102,7 +106,8 @@ const steps: readonly Step[] = [
       'SEO optimization',
       'Analytics and conversion tracking'
     ],
-    path: '/services/website-development'
+    path: '/services/website-development',
+    icon: <Globe size={48} />
   },
   {
     id: "3",
@@ -115,7 +120,8 @@ const steps: readonly Step[] = [
       'Multi-language support capabilities',
       'Seamless handoff to human agents'
     ],
-    path: '/services/ai-chat'
+    path: '/services/ai-chat',
+    icon: <MessageSquare size={48} />
   },
   {
     id: "4",
@@ -128,7 +134,8 @@ const steps: readonly Step[] = [
       'Follow-up and reminder sequences',
       'No-show reduction strategies'
     ],
-    path: '/services/appointment-setting'
+    path: '/services/appointment-setting',
+    icon: <Calendar size={48} />
   },
 ]
 
@@ -246,7 +253,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
       onMouseMove={handleMouseMove}
       style={{ "--x": useMotionTemplate`${mouseX}px`, "--y": useMotionTemplate`${mouseY}px` } as WrapperStyle}
     >
-      <div className="relative w-full overflow-hidden rounded-3xl border border-neutral-200 bg-white transition-colors duration-300 dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="relative w-full overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm transition-colors duration-300">
         <div className="m-10 min-h-[562px] w-full">
           <AnimatePresence mode="wait">
             <motion.div
@@ -257,8 +264,16 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             >
+              <motion.div
+                className="text-green-400 mb-4 animate-bounce-gentle"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.05, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
+              >
+                {steps[step].icon}
+              </motion.div>
               <motion.h2
-                className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 md:text-3xl"
+                className="text-2xl font-bold tracking-tight text-white md:text-3xl"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
@@ -270,7 +285,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.15, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
               >
-                <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-400">
+                <p className="text-base leading-relaxed text-gray-300">
                   {steps[step].description}
                 </p>
               </motion.div>
@@ -279,14 +294,14 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.2, duration: 0.3, ease: [0.22, 1, 0.36, 1]}}
               >
-                <h4 className="text-sm font-semibold text-green-500 dark:text-green-400 mb-3">What's Included:</h4>
+                <h4 className="text-sm font-semibold text-green-400 mb-3">What's Included:</h4>
                 <ul className="space-y-2">
                   {steps[step].features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="flex items-start gap-2">
-                      <svg className="w-4 h-4 text-green-500 dark:text-green-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-green-400 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
-                      <span className="text-sm text-neutral-700 dark:text-neutral-400">{feature}</span>
+                      <span className="text-sm text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -299,7 +314,7 @@ function FeatureCard({ children, step }: { children: React.ReactNode; step: numb
               >
                 <a
                   href={steps[step].path}
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-sky-600 to-sky-500 text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:from-sky-500 hover:to-sky-400 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center gap-2 bg-black border-2 border-green-400/50 text-white px-6 py-3 rounded-full hover:border-green-400 hover:shadow-lg hover:shadow-green-400/20 transition-all duration-300"
                 >
                   Learn More
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
